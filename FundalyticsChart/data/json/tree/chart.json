@@ -1,0 +1,15 @@
+﻿[
+	{"title": "new chart", "key": "_new", "select": true},
+	{"title": "BOTAS", "isFolder": true, "key": "chart_folder_1",
+		"children": [
+			{"title": "BOTAS - Opening Plant Inputs", "key": "1"},
+			{"title": "BOTAS - Closing Plant Outputs", "key": "2"}
+			]
+		},
+	{"title": "GASSCO", "isFolder": true, "key": "chart_folder_2",
+		"children": [
+			{"title": "GASSCO - Dornum to Easington", "key": "3"},
+			{"title": "GASSCO - Emden to Zeebrugge", "key": "4"}
+			]
+		}
+]

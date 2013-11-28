@@ -1,0 +1,99 @@
+﻿/* defaults */
+body                        { width: 100%; height: 100%; font-family: arial, helvetica; font-size: 11px; line-height: 16px; color: #005DAB; }
+select                      { font-size: 10px; color: #005DAB; }
+
+/* layout */
+.main                           { float: left; clear: both; width: 1360px; margin-top: 0px; }
+.main .lhs                      { float: left; width: 498px; }
+.main .lhs .panel               { float: left; width: 478px; padding: 10px; border: solid 1px #FC911A; border-radius: 6px; }
+.main .lhs .panel .message      { float: left; width: 468px; padding: 05px; background-color: #FC911A; border-radius: 4px; color: #FFF; font-size: 11px; font-weight: bold; line-height: 16px; }
+.main .lhs .panel .seriestree   { float: left; width: 478px; height: 430px; margin-top: 5px; overflow: auto; }
+.main .lhs .panel .charttree    { float: left; width: 478px; height: 265px; margin-top: 5px; overflow: auto; }
+.seriestree #seriestree         { float: left; clear: both; width: 458px; padding-bottom: 10px; margin-top: 10px; }
+.main .rhs                      { float: left; width: 823px; padding: 10px; margin-left: 15px; border: 1px solid #005DAB; border-radius: 6px; }
+.main .rhs .chartcontrols       { float: left; clear: both; width: 803px; padding: 10px; background-color: #005DAB; border-radius: 6px; font-size: 12px; }
+.chartcontrols #seriesrows      { float: left; width: 791px; margin-top: 0px; background-color: #FFF; font-size: 11px; letter-spacing: .5px; font-weight: bold; }
+.main .rhs #hc_chart            { float: left; width: 821px; height: 500px; margin-top: 15px; border: solid 1px #005DAB; border-radius: 6px; }
+
+.series_row                     { float: left; clear: both; width: 781px; height: 16px; padding: 4px; border-bottom: 1px solid #FC911A; }
+.series_row_title               { float: left; width: 60%; }
+.series_row_series_type         { float: right; }
+.series_row_remove              { float: right; margin-left: 15px; }
+.series_row_loading             { background-color: #FC911A; color: #FFF; }
+.series_row_remove a            { font-size: 10px; letter-spacing: .5px; text-decoration: none; color: #005DAB }
+.series_row_remove a:hover      { text-decoration: underline; color: #FC911A; }
+.series_row_remove a:visited    { text-decoration: none; color: #005DAB; }
+
+
+
+/* jquery datepicker ui */
+.ui-datepicker {
+	background-color: #FFF;
+	border-color: #FC911A;
+	height: auto;
+	margin: 5px auto 0;
+	font: 11px Arial, Helvetica;
+}
+.ui-datepicker-header  {
+    background-color: #FFF;
+    border-color: #FC911A;
+    color: #005DAB;
+}
+.ui-datepicker-prev, .ui-datepicker-next {  
+    background-image: url('/images/jquery-ui/arrow.png');  
+    background-repeat: no-repeat;  
+}
+.ui-datepicker-prev {
+    float: left; background-position: center -34px;
+}
+.ui-datepicker-prev:hover {
+    background-color: #FC911A;
+}
+.ui-datepicker-next {
+    float: right; background-position: center -4px;
+}
+.ui-datepicker-next:hover {
+    background-color: #FC911A;
+}
+.ui-datepicker th {  
+    color: #005DAB;
+}
+.ui-datepicker-calendar .ui-state-default {
+    background: #005DAB;
+    color: #FFF;
+}
+.ui-datepicker-calendar .ui-state-hover {  
+    background: #FFF;  
+    color: #005DAB;
+}
+.ui-datepicker-calendar .ui-state-active {  
+    background: #FC911A;  
+    color: #FFF;
+}
+
+/* custom quick datetimepicker ui */
+.quickpicker {
+    background-color: #005DAB; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #1F2F47;
+    display: inline-block;
+    color: #FFF;
+    font-family: Arial, Helvetica;
+    font-size: 11px;
+    font-weight: bold;
+    width: 50px;
+    padding: 3px 6px;
+    text-decoration: none;
+}
+.quickpicker:hover {
+    background-color: #FC911A;
+}
+.quickpicker:active {
+    color: #FC911A;
+}
+.quickpickerselected {
+    background-color: #FC911A;
+}    
+

@@ -51,20 +51,42 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\dynatree\seriesRoot.aspx" />
     <Content Include="data\json\series\data.aspx" />
+    <Content Include="data\json\series\meta-flattened.aspx" />
+    <Content Include="data\json\series\meta.aspx" />
+    <Content Include="data\json\series\tags.aspx" />
     <Content Include="data\json\tree\childNodes.aspx" />
     <Content Include="data\json\tree\rootNodes.aspx" />
+    <None Include="data\json\test-tags.json" />
     <Content Include="Global.asax" />
+    <Content Include="images\ajax-loading.gif" />
     <Content Include="images\jquery-ui\arrow.png" />
+    <Content Include="pages\builder.aspx" />
     <Content Include="pages\chart.aspx" />
+    <Content Include="pages\chartcontrols.htm" />
+    <Content Include="pages\pop-up.aspx" />
     <Content Include="pages\prototype.aspx" />
     <Content Include="pages\test.aspx" />
+    <Content Include="pages\_tmp\test-json.aspx" />
     <Content Include="scripts\date.js" />
+    <Content Include="scripts\fundalytics\chart.builder.js" />
+    <Content Include="scripts\fundalytics\dynatree.chart.options.js" />
+    <Content Include="scripts\fundalytics\dynatree.js" />
+    <Content Include="scripts\fundalytics\dynatree.series.options.js" />
+    <Content Include="scripts\fundalytics\hc_chart-pre-factoring.js" />
     <Content Include="scripts\fundalytics\hc_chart.js" />
-    <Content Include="scripts\highcharts.js" />
+    <Content Include="scripts\fundalytics\hc_chart.options.full.js" />
+    <Content Include="scripts\highcharts\exporting.js" />
+    <Content Include="scripts\highcharts\highcharts.js" />
+    <Content Include="scripts\highcharts\highcharts.theme.grey.js" />
     <Content Include="scripts\jquery-ui.custom.js" />
     <Content Include="scripts\jquery.1.8.2.js" />
     <Content Include="scripts\jquery.dynatree.js" />
+    <Content Include="scripts\jquery.isloading.min.js" />
+    <Content Include="scripts\json2.js" />
+    <Content Include="scripts\linq.js" />
+    <Content Include="scripts\linq.min.js" />
     <Content Include="styles\dynatree\skin\icons-rtl.gif" />
     <Content Include="styles\dynatree\skin\icons.gif" />
     <Content Include="styles\dynatree\skin\loading.gif" />
@@ -74,7 +96,10 @@
     <Content Include="styles\dynatree\skin_vista\icons.gif" />
     <Content Include="styles\dynatree\skin_vista\loading.gif" />
     <Content Include="styles\dynatree\skin_vista\ui.dynatree.css" />
+    <Content Include="styles\fundalytics\chart.builder.css" />
+    <Content Include="styles\fundalytics\ui.dynatree.css" />
     <Content Include="styles\fundalytics\style.css" />
+    <Content Include="styles\fundalytics\ui.isloading.css" />
     <Content Include="styles\jquery\jquery-ui.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -92,12 +117,40 @@
     <Compile Include="AppCode\SeriesTag.cs" />
     <Compile Include="AppCode\SeriesTagList.cs" />
     <Compile Include="AppCode\ServiceWrapper.cs" />
+    <Compile Include="data\dynatree\seriesRoot.aspx.cs">
+      <DependentUpon>seriesRoot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data\dynatree\seriesRoot.aspx.designer.cs">
+      <DependentUpon>seriesRoot.aspx</DependentUpon>
+    </Compile>
     <Compile Include="data\json\series\data.aspx.cs">
       <DependentUpon>data.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="data\json\series\data.aspx.designer.cs">
       <DependentUpon>data.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="data\json\series\meta-flattened.aspx.cs">
+      <DependentUpon>meta-flattened.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data\json\series\meta-flattened.aspx.designer.cs">
+      <DependentUpon>meta-flattened.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="data\json\series\meta.aspx.cs">
+      <DependentUpon>meta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data\json\series\meta.aspx.designer.cs">
+      <DependentUpon>meta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="data\json\series\tags.aspx.cs">
+      <DependentUpon>tags.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="data\json\series\tags.aspx.designer.cs">
+      <DependentUpon>tags.aspx</DependentUpon>
     </Compile>
     <Compile Include="data\json\tree\childNodes.aspx.cs">
       <DependentUpon>childNodes.aspx</DependentUpon>
@@ -116,12 +169,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="pages\builder.aspx.cs">
+      <DependentUpon>builder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\builder.aspx.designer.cs">
+      <DependentUpon>builder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="pages\chart.aspx.cs">
       <DependentUpon>chart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="pages\chart.aspx.designer.cs">
       <DependentUpon>chart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="pages\pop-up.aspx.cs">
+      <DependentUpon>pop-up.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\pop-up.aspx.designer.cs">
+      <DependentUpon>pop-up.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\prototype.aspx.cs">
       <DependentUpon>prototype.aspx</DependentUpon>
@@ -137,12 +204,21 @@
     <Compile Include="pages\test.aspx.designer.cs">
       <DependentUpon>test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="pages\_tmp\test-json.aspx.cs">
+      <DependentUpon>test-json.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pages\_tmp\test-json.aspx.designer.cs">
+      <DependentUpon>test-json.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\json\test-meta.json" />
+    <None Include="data\json\tree\chart.json" />
     <None Include="pages\sample.json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

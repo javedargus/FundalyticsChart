@@ -1,12 +1,12 @@
-﻿body            { font-family: arial, helvetica; font-size: 11px; line-height: 16px; color: #005DAB; }
+﻿body            { width: 100%; height: 100%; font-family: arial, helvetica; font-size: 11px; line-height: 16px; color: #005DAB; }
 select          { font-size: 10px; color: #005DAB; }
         
 #pageContainer  { width: 100%; height: 100%; background-color: #000; }
 #tree           { }
     
-#hc_container       { float: left; width: 823px; padding: 10px; margin-left: 15px; border: 1px solid #005DAB; }
-#hc_chart_panel     { float: left; clear: both; width: 803px; padding: 10px; background-color: #005DAB; font-size: 12px; }
-#hc_chart           { float: left; width: 821px; height: 500px; margin-top: 15px; border: solid 1px #005DAB; }
+#hc_container       { float: left; width: 823px; padding: 10px; margin-left: 15px; border: 1px solid #005DAB; border-radius: 6px; }
+#hc_chart_panel     { float: left; clear: both; width: 803px; padding: 10px; background-color: #005DAB; border-radius: 6px; font-size: 12px; }
+#hc_chart           { float: left; width: 821px; height: 500px; margin-top: 15px; border: solid 1px #005DAB; border-radius: 6px; }
 #hc_series          { float: left; width: 791px; margin-top: 0px; background-color: #FFF; font-size: 11px; letter-spacing: .5px; font-weight: bold; }
             
 .series_row                     { float: left; clear: both; width: 781px; height: 16px; padding: 4px; border-bottom: 1px solid #FC911A; }

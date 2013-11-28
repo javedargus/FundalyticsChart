@@ -13,7 +13,7 @@ namespace FundalyticsChart.pages
         
         protected void Page_Load(object sender, EventArgs e) {
 
-            Response.Write("series name = " + ServiceWrapper.GetSeriesMeta(31103).Name.ToString());
+            //Response.Write("series name = " + ServiceWrapper.GetSeriesMeta(31103).Name.ToString());
 
         }
     }

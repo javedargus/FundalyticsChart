@@ -10,6 +10,26 @@ namespace FundalyticsChart.AppCode
     
     public class SeriesManager {
 
+        public static IList<string> GetSeriesTagTypes() {
+
+            IList<string> _tagTypes = new List<string>();
+
+            _tagTypes.Add("COMMODITY");
+            _tagTypes.Add("COUNTRY");
+            _tagTypes.Add("DATA_SOURCE");
+            _tagTypes.Add("DEMAND_TYPE");
+            _tagTypes.Add("LOCATION");
+            _tagTypes.Add("REGION");
+            _tagTypes.Add("ROUTE_CONNECTED_TSO");
+            _tagTypes.Add("ROUTE_CONNECTION");
+            _tagTypes.Add("ROUTE_NAME");
+            _tagTypes.Add("STORAGE_TYPE");
+            _tagTypes.Add("SUPPLY_TYPE");
+            _tagTypes.Add("TSO");
+
+            return _tagTypes;
+        }
+        
         public static SeriesTagList GetSeriesTags(IList<string> tagTypes) {
 
             SeriesTagList _tags = new SeriesTagList();
@@ -34,6 +54,47 @@ namespace FundalyticsChart.AppCode
             return _tags;
         }
 
+        public static SeriesMetaList GetSeriesMeta(IList<string> tagTypes) {
+
+            SeriesMetaList _meta = new SeriesMetaList();
+
+            var db = new Database();
+            string sql =
+                "SELECT " +
+                    "DISTINCT CORE_DATUM_TYPE_ID, DATA_SOURCE, NAME, TAG_TYPE, TAG_VALUE, TAG_DESCRIPTION " +
+                    "FROM " +
+                        "CORE.DATUM_TYPE_TAG " +
+                    "WHERE " +
+                        "TAG_TYPE IN " + GetTagTypeInClauseValues(tagTypes) + " " +
+                    "ORDER BY " +
+                        "CORE_DATUM_TYPE_ID, TAG_TYPE, TAG_VALUE ";
+
+            DataTable table = db.GetDataTable(sql);
+
+            int id = 0;
+            string dataSource = string.Empty;
+            string name = string.Empty;
+            SeriesTagList metaTags = new SeriesTagList();
+
+            foreach (DataRow record in table.Rows) {
+
+                if (Convert.ToInt32(record["CORE_DATUM_TYPE_ID"]) != id) {
+
+                    if (id != 0) { _meta.Add(new SeriesMeta(id, dataSource, name, metaTags)); };
+
+                    id = Convert.ToInt32(record["CORE_DATUM_TYPE_ID"]);
+                    dataSource = record["DATA_SOURCE"].ToString();
+                    name = record["NAME"].ToString();
+
+                    metaTags = new SeriesTagList();
+                }
+
+                metaTags.Add(new SeriesTag(record["TAG_TYPE"].ToString(), record["TAG_VALUE"].ToString()));
+            };
+
+            return _meta;
+        }
+        
         public static SeriesMetaList GetSeriesMeta(IList<string> tagTypes, SeriesTag tag) {
 
             SeriesMetaList _meta = new SeriesMetaList();

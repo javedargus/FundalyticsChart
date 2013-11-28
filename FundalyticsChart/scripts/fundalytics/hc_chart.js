@@ -1,12 +1,16 @@
-﻿// class : hc_chart.
+﻿// ** class : hc_chart.
 function hc_chart() {
 
-    // properties.
-    this.chart_options;
-    this.chart;
-    this.series = new Array();
-    this.timer;
-    this.seriesIndex = function (seriesId) {
+    // ** properties.
+    this.chart_options;     // -- highseries chart options.
+    this.theme = "{}";      // -- highcharts theme.
+    this.markers = false;   // -- display series point markers (toggle).
+    this.chart;             // -- highcharts instance.
+    this.fromdate = (90).days().ago();  // -- series from date.
+    this.fromhour = 0;                  // -- series from hour.
+    this.series = new Array();          // -- series (properties) array (id, name, type, data).
+        
+    this.seriesIndex = function (seriesId) {    // -- find the series index of a given highcharts series.
 
         var seriesName;
 
@@ -25,214 +29,177 @@ function hc_chart() {
         return false;
     };
 
-    // event : initialise.
-    this.initialise = function (title) {
+    // ** chart (instance): -- initialise.
+    this.initialise = function (options, theme, markers, fromdate) {
 
-        this.chart_options = {
-            chart: {
-                renderTo: 'hc_chart',
-                type: 'spline',
-                zoomType: 'x',
-                x: -20
-            },
-            rangeSelector: {
-                buttons: [
-                            { type: 'day', count: 3, text: '3d' },
-                            { type: 'week', count: 1, text: '1w' },
-                            { type: 'month', count: 1, text: '1m' },
-                            { type: 'month', count: 6, text: '6m' },
-                            { type: 'year', count: 1, text: '1y' },
-                            { type: 'all', text: 'All' }
-                        ]
-            },
-            title: {
-                text: '',
-                style: {
-                    display: 'none'
-                }
-            },
-            subtitle: {
-                text: '',
-                style: {
-                    display: 'none'
-                }
-            },
-            xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    month: '%e. %b',
-                    year: '%b'
-                }
-            },
-            plotOptions: {
-                line: {
-                    marker: {
-                        enabled: false
-                    }
-                },
-                spline: {
-                    marker: {
-                        enabled: false
-                    }
-                }
-            }
+        if (typeof fromdate != "undefined") { this.fromdate = fromdate; };
+
+        if (markers) {
+
+            options.plotOptions.area.marker.enabled = true;
+            options.plotOptions.areaspline.marker.enabled = true;
+            options.plotOptions.column.marker.enabled = true;
+            options.plotOptions.line.marker.enabled = true;
+            options.plotOptions.spline.marker.enabled = true;
         };
+
+        this.chart_options = options;
+        this.theme = theme;
+
+        this.chart = new Highcharts.Chart(Highcharts.merge(this.chart_options, this.theme));
+
     };
 
-    // event : initialisechart.
-    this.initialisechart = function () {
+    // ** chart: load and display (series).
+    this.load = function (series) {
 
-        this.chart = new Highcharts.Chart(this.chart_options);
-    };
-
-    // event : add series.
-    this.addseries = function (node, data) {
-
-        this.series[this.series.length] = new hc_series(node.data.key, node.data.title, data, node);
-        this.chart.addSeries({ name: '' + node.data.title + '', data: data });
-        $("#series_row_" + node.data.key).removeClass("series_row_loading");
-    };
-
-    // add series: row.
-    this.addseriesrow = function (id, name, data) {
-
-        var html =
-                    "<div id='series_row_" + id + "' class='series_row series_row_loading'>" +
-                        "<div class='series_row_title'>" + name + "</div>" +
-                        "<div class='series_row_remove'>" +
-                            "<a href='javascript:hc_chart.removeseries(" + id + ", true)'>remove</a>" +
-                        "</div>" +
-                        "<div class='series_row_series_type'>" +
-                            "<select class='series_type' style='width: 100px;' onchange='hc_chart.changeseries(" + id + ", this.value);'>" +
-                                "<option>area</option>" +
-                                "<option>areaspline</option>" +
-                                "<option>column</option>" +
-                                "<option>line</option>" +
-                                "<option>pie</option>" +
-                                "<option selected>spline</option>" +
-                            "</select>" +
-                        "</div>" +
-                    "</div>"
-        $("#hc_series").append(html);
-    };
-
-    // event : change series [type].
-    this.changeseries = function (id, seriesType) {
-
-        this.chart.series[this.seriesIndex(id)].update({ type: seriesType });
-    };
-
-    // event : load series.
-    this.loadseries = function (node, seriesFrom, seriesFromHour) {
-
-        if (this.series.length > 100) { return false; };
-
-        hc_chart.addseriesrow(node.data.key, node.data.title);
-        
-        $.getJSON("/data/json/series/data.aspx?seriesid=" + node.data.key + "&seriesfrom=" + seriesFrom.toString("d-MMM-yyyy") + "&seriesfromhour=" + seriesFromHour, function (data) {
-            hc_chart.addseries(node, data);
-        })
-        .done(function () { })
-        .fail(function (jqXHR, textStatus, errorThrown) { alert(errorThrown); })
-        .always(function () { });
-    };
-
-    // event : reload all series.
-    this.reloadallseries = function (seriesFrom, seriesFromHour) {
-
-        if (this.series.length == 0) { return; };
-
-        var seriesidx = -1; var seriesdata; var flush = {};
-
-        //this.chart.series[0].setData(flush, true); 
-        this.chart.series[0].remove();
+        this.series = series;
 
         for (var ix = 0; ix < this.series.length; ix++) {
 
-            $("#series_row_" + this.series[ix].id).addClass("series_row_loading");
+            this.chartseries(this.series[ix], this.chart);
+        };
+    };
+    
+    // ** chart -- change the (from) date and time.
+    this.changeDate = function (date, hour) {
 
+        var prevDate = this.fromdate;   // store prev date & time.
+        var prevTime = this.fromhour;
 
-            $.getJSON("/data/json/series/data.aspx?seriesid=" + this.series[ix].id + "&seriesfrom=" + seriesFrom.toString("d-MMM-yyyy") + "&seriesfromhour=" + seriesFromHour, function (data) {
-                seriesidx = ix; seriesdata = data;
-            })
-            .done(function () { alert(seriesdata);  /*this.timer = setInterval(function () { alert('reloading ...'); hc_chart.donevent(seriesdata); }, 500);*/ })
-            .fail(function (jqXHR, textStatus, errorThrown) { alert(errorThrown); })
-            .always(function () { });
+        this.fromdate = date;           // set new date and time.
+        this.fromhour = hour;
+
+        // no chart series to sync.
+        if (this.series.length == 0) {
+            return;
+        };
+
+        // sync chart series to new date. 
+        if (this.fromdate >= prevDate) {
+
+            // date > prev: zoom the chart.
+            var todate = new Date(this.chart.xAxis[0].max);
+            this.chart.xAxis[0].setExtremes(this.fromdate, todate);
+            this.chart.showResetZoom();
+
+        } else {
+
+            // date < prev: reload all chart series.
+            this.refreshchart();
+        };
+    };
+    
+    // ** chart: -- clear.
+    this.clearchart = function () {
+
+        $("#tree").dynatree("getSelectedNodes")
+
+        this.series = new Array();
+        this.chart = new Highcharts.Chart(Highcharts.merge(this.chart_options, this.theme));
+    };
+
+    // ** chart: -- refresh & reload related series.
+    this.refreshchart = function () {
+
+        this.chart = new Highcharts.Chart(Highcharts.merge(this.chart_options, this.theme));
+
+        for (var ix = 0; ix < this.series.length; ix++) {
+
+            this.chartseries(this.series[ix], this.chart);
         };
     };
 
-    this.donevent = function (seriesdata) {
+    // ** chart: series: -- add a series to the chart.
+    this.chartseries = function (series, chart) {
 
-        alert("*" + seriesdata + "*");
-        if (seriesdata == "") { alert('nowt'); return; };
+        $.ajax({
 
-        this.chart.addSeries({ name: '' + "new title" + '', data: seriesdata });
-        clearInterval(this.timer);
+            dataType: "json",
+            url: "/data/json/series/data.aspx?seriesid=" + series.id + "&seriesfrom=" + this.fromdate.toString("d-MMM-yyyy") + "&seriesfromhour=" + this.fromhour,
+            async: true,
+            success: function (data, textStatus, jqXHR) {
+                chart.addSeries({ name: '' + series.name + '', type: series.type, data: data })     // add to chart.
+                series.data = data;     // store the series data.
+            }
+        })
     };
 
-    // event : remove series.
-    this.removeseries = function (id, toggle) {
+    // ** chart: series: -- load a new series.
+    this.loadseries = function (id, name, type) {
 
-        $("#series_row_" + id).remove();
-        this.chart.series[this.seriesIndex(id)].remove();
+        var series = new hc_series(id, name, type, null);   // store the series.
+        this.series[this.series.length] = series;
+
+        // add the series to the chart.
+        this.chartseries(series, this.chart);
+    };
+
+    // ** chart: series: -- remove an existing series.
+    this.removeseries = function (id) {
 
         var newseries = new Array();
+        
+        this.chart.series[this.seriesIndex(id)].remove();
         for (var ix = 0; ix < this.series.length; ix++) {
 
-            if (this.series[ix].id == id) {
-                if (toggle) { this.series[ix].node.toggleSelect(); };
-            };
-            if (this.series[ix].id != id) {
-                newseries[newseries.length] = this.series[ix];
-            };
+            if (this.series[ix].id != id) { newseries[newseries.length] = this.series[ix]; };
         };
+
         this.series = newseries;
+        if (this.series.length == 0) { this.chart = new Highcharts.Chart(Highcharts.merge(this.chart_options, this.theme)); };
     };
 
-    // event : refresh (all) series.
-    this.refresh = function () {
+    // ** chart: series: -- to JSON string.
+    this.seriesToJSON = function () {
 
-        var ix;
-        for (ix = 0; ix < this.series.length; ix++) {
+        var series = this.series;
+        for (var ix = 0; ix < series.length; ix++) {
 
-            var refreshchart = chart.series[ix];
-            var existingdata = this.series[ix].data;
-
-            try {
-
-                $.getJSON("getargusrefreshjson.aspx?datasourceid=" + this.series[ix].id, function (newdata) {
-
-                    $.each(newdata, function (i, newvalue) {
-
-                        try {
-
-                            var exists = false;
-
-                            $.each(existingdata, function (i, existingvalue) {
-
-                                if (existingvalue[0] == newvalue[1]) { exists = true; }
-                            });
-
-                            if (!exists) {
-
-                                alert("new value found");
-                                refreshchart.addPoint([newvalue[1], newvalue[2]]);
-                            };
-
-                        } catch (err) { alert(err); };
-                    });
-                });
-            } catch (err) { alert(err); };
+            series[ix].data = null;
         };
+
+        return JSON.stringify(this.series);
+    };
+
+    // ** chart: set theme.
+    this.settheme = function () {
+
+        // set theme and re-init chart.
+        this.chart = new Highcharts.Chart(Highcharts.merge(this.chart_options, this.theme));
+
+        // re-add any existing series to new chart.
+        if (this.series.length == 0) { return; };
+        for (var ix = 0; ix < this.series.length; ix++) {
+
+            this.chart.addSeries({ name: '' + this.series[ix].name + '', type: this.series[ix].type, data: this.series[ix].data });
+        };
+    };
+    
+    // ** chart: series: -- set line markers (toogle).
+    this.setmarkers = function () {
+        
+        if (this.series.length == 0) { return; };
+        for (var ix = 0; ix < this.series.length; ix++) {
+
+            this.chart.series[ix].update({ marker: { enabled: this.markers} });
+        };
+    };
+
+    // ** chart: series: type: -- change the highcharts series type.
+    this.changeseriestype = function (id, type) {
+
+        this.series[this.seriesIndex(id)].type = type;
+        this.chart.series[this.seriesIndex(id)].update({ type: type });
     };
 };
 
-// class : hc_series.
-function hc_series(id, name, data, node) {
+// ** class : hc_series.
+function hc_series(id, name, type, data) {
 
     // properties.
     this.id = id;
     this.name = name;
+    this.type = type;
     this.data = data;
-    this.node = node;
 };

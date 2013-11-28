@@ -1,0 +1,27 @@
+﻿.isloading-wrapper.isloading-right {
+            margin-left: 10px;
+}
+.isloading-overlay {
+    position: relative;
+    text-align: center;
+    margin-top: 400px;
+}
+.isloading-overlay .isloading-wrapper {
+    font-family: Arial, Helvetica;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #005DAB;
+    background: #FC911A;
+    -webkit-border-radius: 6px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 6px;
+    -moz-background-clip: padding;
+    border-radius: 6px;
+    background-clip: padding-box;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    top: 10%;
+    z-index: 9000;
+}

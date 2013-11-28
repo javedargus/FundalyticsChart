@@ -1,0 +1,42 @@
+﻿[
+	{	
+		"series": {
+			"id": "1",
+			"datasource": "MIPI",
+			"name": "test series 1",
+			"tags": {
+				"tag": [
+					{"type": "COMMODITY", "value": "GAS"},
+					{"type": "DATASOURCE", "value": "GASSCO"}
+				]
+			}
+		}
+	},
+	{	
+		"series": {
+			"id": "2",
+			"datasource": "DS2",
+			"name": "test series 2",
+			"tags": {
+				"tag": [
+					{"type": "COMMODITY", "value": "GAS"},
+					{"type": "DATASOURCE", "value": "GASSCO"},
+					{"type": "DATASOURCE", "value": "BOTAS"}
+				]
+			}
+		}
+	},
+	{	
+		"series": {
+			"id": "3",
+			"datasource": "DS3",
+			"name": "test series 3",
+			"tags": {
+				"tag": [
+					{"type": "COMMODITY", "value": "GAS"},
+					{"type": "DATASOURCE", "value": "GASSCO"}
+				]
+			}
+		}
+	}
+]
