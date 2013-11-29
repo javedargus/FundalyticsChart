@@ -20,6 +20,7 @@
     <!-- highcharts -->
     <script type="text/javascript" src="/scripts/highcharts/highcharts.js"></script>
     <script type="text/javascript" src="/scripts/highcharts/highcharts.theme.grey.js"></script>
+    <script type="text/javascript" src="/scripts/highcharts/export-csv.js"></script>
     <!-- fundalytics: dynatree: default chart tree and series tree options -->
     <script type="text/javascript" src="/scripts/fundalytics/dynatree.chart.options.js"></script>
     <script type="text/javascript" src="/scripts/fundalytics/dynatree.series.options.js"></script>
@@ -41,29 +42,24 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 
     <script type="text/javascript">
-
         
         // ajax start stop (loading series) dialog handling.
-        var ajaxloadtree = true;
-
+        var initprofiles = true; var initseries = false; 
         $(document).ajaxStart(function () {
 
-            if (ajaxloadtree) { return; };
-            
             $("body").append("<div id='loadingseries' style='background-color: #005DAB; opacity: .2; position: absolute; top: 0; left: 0; height: 100%; width: 100%; z-index: 999;'></div>");
-            $.isLoading({ text: "Retrieving series data" });
-        
-            
+
+            var msg = ((initseries) || (initprofiles)) ? "Initialiasing Chart Builder. Please wait ..." : "Retrieving series data";
+            $.isLoading({ text: msg });
         });
         $(document).ajaxStop(function () {
 
-            if (ajaxloadtree) { ajaxloadtree = false; return; };
-                        
-            $.isLoading("hide"); 
-            $("#loadingseries").remove(); 
+            if (initseries) { initseries = false; };
+            if (initprofiles) { initprofiles = false; initseries = true; };
 
-            //alert('remove class');
-            //$(".series_row").removeClass("series_row_loading");
+            $.isLoading("hide");
+            $("#loadingseries").remove();
+            $(".series_row").removeClass("series_row_loading");
         });
 
         // defaults for jquery isloading dialog. 
@@ -98,7 +94,7 @@
                 toNode.addChild({ title: item.series.name, isFolder: false, key: item.series.id });
             });
 
-
+            
         };
 
         function replaceQuotes(str) {
@@ -134,9 +130,7 @@
             <div class="panel" style="margin-top: 10px; border-color: #50A6C2">
                 <div class="message" style="background-color: #50A6C2;">
                     <span style="display: block; color: #DDD; font-size: 12px; letter-spacing: 1px;">CHART SELECTOR</span>
-                    Double click the required chart leaf or drag abd
-                    drop into the builder panel to load a
-                    chart into the builder.
+                    To load a chart profile double click the required profile node.
                 </div>
                 <div class="charttree">
                     <!-- chart: dynatree container -->
@@ -146,10 +140,18 @@
         </div>
 
         <!-- page RHS -->
-        <div class="rhs">
+        <div class="rhs" id="hc_container">
+            <!-- control panel header -->
+            <div style="float: left; clear: both; width: 801px; padding: 7px 10px 5px 10px; margin-top: 00px; background-color: #DDDDDD; font-size: 11px; font-weight: bold; letter-spacing: 1px; color: #005DAB; border: dotted 1px #005DAB; border-radius: 12px;">
+                FUNDALYTICS CHART BUILDER: CONTROL PANEL
+            </div>
             <!-- chart control panel -->
             <div class="chartcontrols">
                 <!--#include virtual="chartcontrols.htm" --> 
+            </div>
+            <!-- chart header -->
+            <div style="float: left; clear: both; width: 801px; padding: 7px 10px 5px 10px; margin-top: 10px; background-color: #50A6C2; font-size: 11px; font-weight: bold; letter-spacing: 1px; color: #FFFFFF; border: dotted 1px #005DAB; border-radius: 12px;">
+                CURRENT CHART DISPLAY
             </div>
             <!-- chart (highcharts) -->
             <div id="hc_chart"></div>  

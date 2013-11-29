@@ -12,22 +12,22 @@
 
     <script type="text/javascript">
 
-        var seriesMeta = new Array();
-        var seriesTags = new Array();
+        var chartProfiles = new Array();
 
         $(function () {
 
-            alert('here');
+            alert('in doc load');
 
             $.ajax({
 
                 dataType: "json",
-                url: "/data/json/test-tags.json",
+                url: "/data/json/chart/demo2.json",
                 async: false,
                 success: function (data, textStatus, jqXHR) {
-                    alert(data);
-                    seriesTags = data;
-                    alert(seriesTags.length);
+                    chartProfiles = data;
+
+                    alert(chartProfiles[0].name);
+                    alert(chartProfiles[0].series[0].name);
                 }
             });
 

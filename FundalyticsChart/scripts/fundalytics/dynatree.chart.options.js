@@ -2,26 +2,16 @@
     checkbox: false,
     selectMode: 1,
     initAjax: {
-        url: "/data/json/tree/chart.json"
+        url: "/data/dynatree/chartRoot.json"
     },
     onSelect: function (select, node) {
-        if (node.data.isFolder) {
-            return false;
-        };
-        if (node.data.key == "_new") {
-
-            chartbuilder.clear();
-        };
-        if (node.data.key == "3") {
-            chartbuilder.clear();
-            chartbuilder.tmp();
-        };
-        /*
+        if (node.data.isFolder) { return false; };
+        if (node.data.key == "_new") { chartbuilder.clear(); return; };
         if (select) {
-        chartbuilder.loadseries(node);
+            chartbuilder.loadprofile(node.data.key);
         } else {
-        chartbuilder.removeseries(node.data.key, false);
-        };*/
+            chartbuilder.clear();
+        };
     },
     onDblClick: function (node, event) {
         node.toggleSelect();
@@ -35,7 +25,7 @@
     onLazyRead: function (node) {
         ajaxloadtree = true,
                     node.appendAjax({
-                        url: "/data/json/tree/childNodes.aspx" + node.data.key,
+                        url: "/data/dynatree/tree/childNodes.aspx" + node.data.key,
                         debugLazyDelay: 750
                     });
     },

@@ -38,12 +38,9 @@ namespace FundalyticsChart.data.dynatree
                             sb = new StringBuilder(); sb.Append(json);
                         };
 
-                        sb.Append("{\"title\": \"" + tag.Type + "\", \"isFolder\": true, \"unselectable\": true, \"expand\": " + (tag.Type == "DATA_SOURCE" ? "true" : "false") + ", \"key\": \"" + tag.Type + "\", \"children\": [");
+                        sb.Append("{\"title\": \"" + tag.Type + "\", \"isFolder\": true, \"unselectable\": true, \"expand\": " + (tag.Type == "***" ? "true" : "false") + ", \"key\": \"" + tag.Type + "\", \"children\": [");
                     };
 
-                    //sb.Append("{\"title\": \"" + tag.Value + "\",  \"isFolder\": true, \"unselectable\": true, \"isLazy\": true, \"key\": \"" + "?tagtype=" + tag.Type + "&tagvalue=" + tag.Value + "\"},");
-                    //sb.Append("{\"title\": \"" + tag.Value + "\",  \"isFolder\": true, \"unselectable\": true, \"isLazy\": true, \"key\": \"" + "[{\"type\": \"" + tag.Type + "\", \"value\": \"" + tag.Value + "\"}]\"},");
-                    //sb.Append("{\"title\": \"" + tag.Value + "\",  \"isFolder\": true, \"unselectable\": true, \"isLazy\": true, \"key\": \"" + "[tag: {type: " + tag.Type + ", value: " + tag.Value + "}]\"},");
                     sb.Append("{\"title\": \"" + tag.Value + "\",  \"isFolder\": true, \"unselectable\": true, \"isLazy\": true, \"key\": \"" + "[{&quot;type&quot;: &quot;" + tag.Type + "&quot;, &quot;value&quot;: &quot;" + tag.Value + "&quot;}]\"},");
                 };
             };

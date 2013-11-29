@@ -24,13 +24,13 @@ namespace FundalyticsChart.data.json.series
 
                     sb.Append(
                         "{" +
-                            "\"series\": {" +
+                            //"\"series\": {" +
                                 "\"id\": \"" + item.Id + "\"," +
                                 "\"datasource\": \"" + item.DataSource + "\"," +
                                 "\"name\": \"" + item.Name + "\"," +
                                 "\"tagtype\": \"" + tag.Type + "\"," +
-                               "\"tagvalue\": \"" + tag.Value + "\"" +
-                            "}" +
+                                "\"tagvalue\": \"" + tag.Value + "\"" +
+                            //"}" +
                         "},"
                     );
                 };

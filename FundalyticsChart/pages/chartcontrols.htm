@@ -1,104 +1,110 @@
-﻿    
-    <!-- controls: top -->
+﻿    <!-- controls: top -->
     <div style="float: left; clear: both; width: 100%; color: #FFF;">
         
-        <!-- quick date picker -->
-        <div style="float: left; width: 70px;">
-            Quick timeseries historic picker:
-        </div>
-        <div style="float: left; padding: 5px; margin: 10px 0px 0px 10px; background-color: #FFF; border-radius: 6px;">
-            <div style="float: left;">
-                <input type="button" class="quickpicker" id="1hr" value="1hr" />  <br />
-                <input type="button" class="quickpicker" value="3hrs" /> <br />
-                <input type="button" class="quickpicker" value="6hrs" /> <br />
-                <input type="button" class="quickpicker" value="12hrs" />
+        <!-- quick period picker -->
+        <div style="float: left; clear: both;">
+            <div style="float: left; clear: both; width: 106px; font-weight: bold; letter-spacing: .6px;">
+                TIME PERIOD:
             </div>
-            <div style="float: left; margin-left: 6px;">
-                <input type="button" class="quickpicker" value="1d" />   <br />
-                <input type="button" class="quickpicker" value="3d" />   <br />
-                <input type="button" class="quickpicker" value="7d" />  <br />
-                <input type="button" class="quickpicker quickpickerselected" value="90d" />
-            </div>
-            <div style="float: left; margin-left: 6px;">
-                <input type="button" class="quickpicker" value="1m" />   <br />
-                <input type="button" class="quickpicker" value="2m" />   <br />
-                <input type="button" class="quickpicker" value="3m" />   <br />
-                <input type="button" class="quickpicker" value="6m" />
-            </div>
-            <div style="float: left; margin-left: 6px;">
-                <input type="button" class="quickpicker" value="1y" />   <br />
-                <input type="button" class="quickpicker" value="2y" />   <br />
-                <input type="button" class="quickpicker" value="3y" />   <br />
-                <input type="button" class="quickpicker" value="5y" />
+            <div style="float: right; padding: 5px; margin-top: 5px; background-color: #DDD; border-radius: 6px;">
+                &nbsp;
+                <!-- hours -->
+                <input type="button" class="quickpicker" id="1h"   value="1hr"      /> &nbsp;
+                <input type="button" class="quickpicker" id="3h"   value="3hrs"     /> &nbsp;
+                <input type="button" class="quickpicker" id="6h"   value="6hrs"     /> &nbsp;
+                <!-- days -->
+                <input type="button" class="quickpicker quickpickerselected" id="1d" value="1d" /> &nbsp;
+                <input type="button" class="quickpicker" id="3d"    value="3d"                  /> &nbsp;  
+                <input type="button" class="quickpicker" id="7d"    value="7d"                  /> &nbsp;  
+                <!-- months -->
+                <input type="button" class="quickpicker" id="1m"  value="1m"        /> &nbsp;
+                <input type="button" class="quickpicker" id="3m"  value="3m"        /> &nbsp;
+                <input type="button" class="quickpicker" id="6m"  value="6m"        /> &nbsp;
+                <!-- years -->
+                <input type="button" class="quickpicker" id="1y"  value="1y"        /> &nbsp;
+                <input type="button" class="quickpicker" id="3y"  value="3y"        /> &nbsp;
+                <input type="button" class="quickpicker" id="6y"  value="6y"        /> &nbsp;
             </div>
         </div>
-        
-        <!-- date picker -->
-        <div style="float: left; width: 70px; margin-left: 25px;">
-            Timeseries from:
-        </div>
-        <div style="float: left; padding: 5px; padding-top: 0px; margin: 10px 0px 0px 10px; background-color: #FFF; border-radius: 6px;">
+
+        <!-- datepicker (keep in to ensure javascript execution ) -->
+        <div style="float: left; clear: both; display: none;">
             <div id="datepicker" style="font-family: Arial; font-size: 9px;"></div>
         </div>
 
         <!-- chart options -->
-        <div style="float: left; width: 130px; margin-top: 5px; margin-left: 35px;">
-            
-            <!-- theme (grey / default) -->
-            <div style="float: left; clear: both;">
-                Theme:
+        <div style="float: left; clear: both; margin-top: 10px;">
+            <div style="float: left; clear: both; width: 106px; font-weight: bold; letter-spacing: .6px;">
+                SETTINGS:
             </div>
-            <div style="float: left; clear: both; margin-top: 0px;">
-                <div style="float: left; width: 60px; margin-top: 1px; font-size: 10px; font-weight: bold; color: #FC911A;">
+            <!-- theme (grey / default) -->
+            <div style="float: left; height: 27px; padding: 5px; margin-top: 5px; background-color: #EEE; border-radius: 6px;">
+                <div style="float: left; clear: both; margin: 0px 0px 0px 5px; font-weight: bold; color: #333;">
+                    Theme:
+                </div>
+                <div style="float: left; margin: 5px 0px 0px 20px; font-size: 10px; font-weight: bold; color: #FC911A;">
                     DARK GREY
                 </div>
-                <div style="float: left;margin-left: 5px;">
+                <div style="float: left; margin: 5px 0px 0px 5px; ">
                     <input id="themedarkgrey" type="checkbox" />
                 </div>
             </div>
             <!-- series markers (off/on) -->
-            <div style="float: left; clear: both; margin-top: 5px;">
-                Line marker:
-            </div>
-            <div style="float: left; clear: both; margin-top: 0px;">
-                <div style="float: left; width: 60px; margin-top: 1px; font-size: 10px; font-weight: bold; color: #FC911A;">
+            <div style="float: left; height: 27px; padding: 5px; margin: 5px 0px 0px 15px; background-color: #EEE; border-radius: 6px;">
+                <div style="float: left; clear: both; margin: 0px 0px 0px 5px; font-weight: bold; color: #333;">
+                    Show series markers:
+                </div>
+                <div style="float: left; margin: 5px 0px 0px 20px; font-size: 10px; font-weight: bold; color: #FC911A;">
                     DISABLED
                 </div>
-                <div style="float: left;margin-left: 5px;">
+                <div style="float: left; margin: 5px 0px 0px 5px; ">
                     <input id="seriesmarkers" type="checkbox" checked />
                 </div>
             </div>
-
             <!-- series type (default) -->
-            <div style="float: left; clear: both; margin-top: 5px;">
-                Default series type:
+            <div style="float: left; height: 27px; padding: 5px; margin: 5px 0px 0px 15px; background-color: #EEE; border-radius: 6px;">
+                <div style="float: left; clear: both; margin: 0px 0px 0px 5px; font-weight: bold; color: #333;">
+                    Default series type:
+                </div>
+                <div style="float: left; margin: 5px 0px 0px 23px; ">
+                    <select id="defaultseriestype" style="font-size: 11px; color: #005DAB; font-weight: bold; width: 120px;">
+                        <option value="area">area</option>
+                        <option value="areaspline">areaspline</option>
+                        <option value="column">column</option>
+                        <option value="line">line</option>
+                        <option value="spline" selected>spline</option>
+                    </select>
+                </div>
             </div>
-            <div style="float: left; clear: both; margin-top: 2px;">
-                <select id="defaultseriestype" style="font-size: 11px; color: #005DAB; font-weight: bold; width: 120px;">
-                    <option value="area">area</option>
-                    <option value="areaspline">areaspline</option>
-                    <option value="column">column</option>
-                    <option value="line">line</option>
-                    <option value="spline" selected>spline</option>
-                </select>
-            </div>
-
-            <!-- actions --> 
-            <div style="float: left; clear: both; width: 120px; height: 30px; margin-top: 10px; padding-top: 10px; border-top: dotted 1px #FC911A;">
-              
-                <input type="button" value="test" onclick="javascript:chartbuilder.launch();" />  
-                
-            </div>
-
         </div>
-        <!-- END: chart options -->
+        
+        <!-- chart series (selected) -->
+        <div style="float: left; clear: both; margin-top: 10px;">
+            <div style="float: left; clear: both; width: 106px; font-weight: bold; letter-spacing: .6px; color: #FC911A;">
+                CURRENT SERIES:
+            </div>
+            <div style="float: left; width: 685px; min-height: 125px; padding: 5px; margin-top: 5px; background-color: #FFF; color: #005DAB; border-radius: 6px;">
+                <div id="seriesrows"></div>
+            </div>
+        </div>    
 
+        <!-- charting / series functions -->
+        <div style="float: left; clear: both; margin-top: 15px;">
+            <div style="float: left; width: 110px;">&nbsp;</div>
+            <div style="float: left; width: 685px; border-top: dotted 1px #FC911A;">
+                <div style="float: left; margin-top: 5px;">
+                    <a class="btn" href="#" onclick="javascript:chartbuilder.launch();">[launch chart in new window]</a>&nbsp;&nbsp;&nbsp;
+                    <a class="btn" href="#" id="exporttocsv">[export series data to csv]</a>
+                </div>    
+                <div style="float: right; margin-top: 5px;">
+                    <a class="btn" href="#" onclick="javascript:chartbuilder.clear();">[clear all series]</a>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <!-- END: controls: top --> 
 
-    <!-- controls: bottom --> 
-    <div style="float: left; clear: both; color: #FC911A;">Current series:</div>
-    <div style="float: left; clear: both; min-height: 100px; padding: 5px; margin-top: 5px; background-color: #FFF; border-radius: 6px;">
-        <div id="seriesrows"></div>
-    </div>
+    
+    
 

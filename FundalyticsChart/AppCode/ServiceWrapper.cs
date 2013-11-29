@@ -85,7 +85,22 @@ namespace FundalyticsChart.AppCode
 
         public static XmlNodeList GetSeries(int id, DateTime fromDate) {
 
-            string data = GetRequest("https://fundalytics.argusmedia.com/datatypes/" + id.ToString() + "/data/" + fromDate.ToString("yyyy-MM-dd"));
+            string data = GetRequest("https://fundalytics.argusmedia.com/datatypes/" 
+                            + id.ToString() + "/data/" + fromDate.ToString("yyyy-MM-dd"));
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(data);
+
+            return xml.SelectNodes("/ArgusFundamentals/Data/DataPoint");
+        }
+
+        public static XmlNodeList GetSeries(int id, DateTime fromDate, int fromHour) {
+
+            string hours = fromHour.ToString();
+            hours = (hours.Length == 1) ? "0" + hours : hours;
+
+            string data = GetRequest("https://fundalytics.argusmedia.com/datatypes/" 
+                            + id.ToString() + "/data/" + fromDate.ToString("yyyy-MM-dd") + "/" + hours + ".00");
 
             XmlDocument xml = new XmlDocument();
             xml.LoadXml(data);

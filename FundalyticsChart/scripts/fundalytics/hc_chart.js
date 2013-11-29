@@ -119,7 +119,7 @@ function hc_chart() {
             url: "/data/json/series/data.aspx?seriesid=" + series.id + "&seriesfrom=" + this.fromdate.toString("d-MMM-yyyy") + "&seriesfromhour=" + this.fromhour,
             async: true,
             success: function (data, textStatus, jqXHR) {
-                chart.addSeries({ name: '' + series.name + '', type: series.type, data: data })     // add to chart.
+                chart.addSeries({ name: '' + replaceComma(series.name) + '', type: series.type, data: data })     // add to chart.
                 series.data = data;     // store the series data.
             }
         })
@@ -172,13 +172,13 @@ function hc_chart() {
         if (this.series.length == 0) { return; };
         for (var ix = 0; ix < this.series.length; ix++) {
 
-            this.chart.addSeries({ name: '' + this.series[ix].name + '', type: this.series[ix].type, data: this.series[ix].data });
+            this.chart.addSeries({ name: '' + replaceComma(this.series[ix].name) + '', type: this.series[ix].type, data: this.series[ix].data });
         };
     };
     
     // ** chart: series: -- set line markers (toogle).
     this.setmarkers = function () {
-        
+
         if (this.series.length == 0) { return; };
         for (var ix = 0; ix < this.series.length; ix++) {
 
@@ -202,4 +202,12 @@ function hc_series(id, name, type, data) {
     this.name = name;
     this.type = type;
     this.data = data;
+};
+
+// general: replace comma in string with " -".
+function replaceComma(str) {
+
+    var comma = ',';
+
+    return str.replace(new RegExp(comma, 'g'), ' -');
 };

@@ -1,0 +1,41 @@
+﻿[
+	{	
+		"id": "1",
+		"name": "Gassco - Dornum to Easington",
+		"period": "1d",
+		"theme": "",
+		"markers": "false",
+		"series": [
+			{"id": "34000", "name": "GASSCO, Dornum Flows MSm3/d",		"type": "spline"},
+			{"id": "34003", "name": "GASSCO, Dunkerque Flows MSm3/d",	"type": "spline"},
+			{"id": "34005", "name": "GASSCO, Easington Flows MSm3/d",	"type": "spline"}
+		]
+	},
+	{	
+		"id": "2",
+		"name": "Gassco - Emden to Zeebrugge",
+		"period": "6h",
+		"theme": "grey_theme",
+		"markers": "false",
+		"series": [
+			{"id": "34001", "name": "GASSCO, Emden EMS Flows MSm3/d",	"type": "spline"},
+			{"id": "34002", "name": "GASSCO, Emden NGT Flows MSm3/d",	"type": "areaspline"},
+			{"id": "34007", "name": "GASSCO, Entry SEGAL Flows MSm3/d", "type": "spline"},
+			{"id": "34006", "name": "GASSCO, St. Fergus Flows MSm3/d",	"type": "spline"},
+			{"id": "34004", "name": "GASSCO, Zeebrugge Flows MSm3/d",	"type": "spline"}
+		]
+	},
+	{	
+		"id": "3",
+		"name": "Botas Plant Inputs, Opening and Closing",
+		"period": "7d",
+		"theme": "",
+		"markers": "false",
+		"series": [
+			{"id": "91001", "name": "BOTAS, Plant Inputs, Opening (Sm3)",	"type": "spline"},
+			{"id": "91000", "name": "BOTAS, Plant Inputs, Opening (StdM3)", "type": "spline"},
+			{"id": "91003", "name": "BOTAS, Plant Inputs, Closing (Sm3)",	"type": "spline"},
+			{"id": "91002", "name": "BOTAS, Plant Inputs, Closing (StdM3)", "type": "spline"}
+		]
+	}
+]

@@ -1,0 +1,4 @@
+﻿[
+	{ "title": "new chart", "key": "_new", "select": true },
+	{ "title": "Chart Profiles", "isFolder": true, "expand": true, "key": "chart_profiles" }
+]

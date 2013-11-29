@@ -24,7 +24,8 @@
     },
     onLazyRead: function (node) {
 
-        addSeriesNodes(node);
+        getSeriesTreeChildNodes(node);
+        //addSeriesNodes(node);
         /*
         ajaxloadtree = true,
                     node.appendAjax({

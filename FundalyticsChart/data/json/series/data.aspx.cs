@@ -33,11 +33,23 @@ namespace FundalyticsChart.data.json.series
             } catch {
                 _seriesFromHour = 0; };
 
-            _seriesFrom = _seriesFrom.AddHours(_seriesFromHour);
+            if (_seriesFromHour != 0) {
+                _seriesFrom = _seriesFrom.AddHours(_seriesFromHour);
+            } else {
+                _seriesFrom = _seriesFrom.AddHours(_seriesFromHour);
+            };
 
+            XmlNodeList series;
             StringBuilder sb = new StringBuilder();
 
-            XmlNodeList series = ServiceWrapper.GetSeries(_seriesId, _seriesFrom);
+            if (_seriesFromHour != 0)
+            {
+                series = ServiceWrapper.GetSeries(_seriesId, _seriesFrom, _seriesFromHour);
+            } else {
+
+                series = ServiceWrapper.GetSeries(_seriesId, _seriesFrom);
+            };
+            
             foreach (XmlNode point in series) {
 
                 DateTime point_datetime = DateTime.Parse(point["AppliesToDateTime"].InnerText);

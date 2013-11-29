@@ -58,11 +58,14 @@
     <Content Include="data\json\series\tags.aspx" />
     <Content Include="data\json\tree\childNodes.aspx" />
     <Content Include="data\json\tree\rootNodes.aspx" />
+    <None Include="data\dynatree\chartRoot.json" />
+    <None Include="data\json\chart\demo.json" />
     <None Include="data\json\test-tags.json" />
     <Content Include="Global.asax" />
     <Content Include="images\ajax-loading.gif" />
     <Content Include="images\jquery-ui\arrow.png" />
     <Content Include="pages\builder.aspx" />
+    <Content Include="pages\chart-controls-with-datepicker.htm" />
     <Content Include="pages\chart.aspx" />
     <Content Include="pages\chartcontrols.htm" />
     <Content Include="pages\pop-up.aspx" />
